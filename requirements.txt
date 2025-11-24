@@ -1,0 +1,8 @@
+chromadb
+sentence-transformers
+requests
+beautifulsoup4
+serpapi
+openai
+faiss-cpu
+python-dotenv
