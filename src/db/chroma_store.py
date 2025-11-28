@@ -6,7 +6,10 @@ Wrapper around ChromaDB to store and query vector embeddings for MARS.
 
 import os
 import chromadb
+<<<<<<< HEAD
 from chromadb.config import Settings
+=======
+>>>>>>> ec1bd1a (Upload full local project)
 from typing import List, Dict
 from datetime import datetime
 import uuid
@@ -17,6 +20,7 @@ import uuid
 # -----------------------------------------------------------
 
 def get_chroma_client():
+<<<<<<< HEAD
     persist_dir = os.environ.get("CHROMA_PERSIST_DIR", "./chroma_db")
 
     client = chromadb.Client(Settings(
@@ -24,6 +28,13 @@ def get_chroma_client():
         persist_directory=persist_dir
     ))
 
+=======
+    """
+    Creates a persistent Chroma client.
+    """
+    # Use the new, recommended PersistentClient
+    client = chromadb.PersistentClient(path="./chroma_db")
+>>>>>>> ec1bd1a (Upload full local project)
     return client
 
 

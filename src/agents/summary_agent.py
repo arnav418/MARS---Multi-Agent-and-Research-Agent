@@ -5,19 +5,32 @@ This agent:
 1. Embeds the user query
 2. Retrieves relevant chunks from memory
 3. Builds a RAG prompt
+<<<<<<< HEAD
 4. Calls an LLM (OpenAI or Gemini)
+=======
+4. Calls an LLM (Gemini)
+>>>>>>> ec1bd1a (Upload full local project)
 5. Produces a clean, cited summary
 """
 
 import os
 from typing import List, Dict
 
+<<<<<<< HEAD
 from src.utils.embeddings import embed_text
 from src.db.chroma_store import query_memory
 
 # If using OpenAI
 from openai import OpenAI
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+=======
+import google.generativeai as genai
+from src.utils.embeddings import embed_text
+from src.db.chroma_store import query_memory
+
+# Configure the Gemini API client
+genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
+>>>>>>> ec1bd1a (Upload full local project)
 
 
 # -----------------------------------------------------------
@@ -47,7 +60,11 @@ def format_context(results: Dict) -> str:
 
 def build_rag_prompt(query: str, context: str) -> str:
     """
+<<<<<<< HEAD
     Creates a citation-rich RAG prompt.
+=======
+    Creates a citation-rich RAG prompt for Gemini.
+>>>>>>> ec1bd1a (Upload full local project)
     """
 
     return f"""
@@ -70,7 +87,11 @@ CONTEXT:
 
 ANSWER:
 """
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> ec1bd1a (Upload full local project)
 
 # -----------------------------------------------------------
 # 3. GENERATE SUMMARY (CALL LLM)
@@ -81,7 +102,11 @@ def generate_summary(query: str, top_k: int = 5) -> str:
     - Embed the query
     - Retrieve chunks
     - Build prompt
+<<<<<<< HEAD
     - LLM generation
+=======
+    - LLM generation (Gemini)
+>>>>>>> ec1bd1a (Upload full local project)
     """
 
     # 1. Embed query
@@ -96,6 +121,7 @@ def generate_summary(query: str, top_k: int = 5) -> str:
     # 4. RAG prompt
     prompt = build_rag_prompt(query, context_text)
 
+<<<<<<< HEAD
     # 5. Call LLM (OpenAI)
     completion = client.chat.completions.create(
         model="gpt-4o-mini",   # safe small model, replace if needed
@@ -103,3 +129,13 @@ def generate_summary(query: str, top_k: int = 5) -> str:
     )
 
     return completion.choices[0].message.content
+=======
+    # 5. Call LLM (Gemini)
+    try:
+        model = genai.GenerativeModel('models/gemini-pro-latest')
+        response = model.generate_content(prompt)
+        return response.text
+    except Exception as e:
+        print(f"Error during Gemini API call: {e}")
+        return "Error: Could not generate a summary."
+>>>>>>> ec1bd1a (Upload full local project)

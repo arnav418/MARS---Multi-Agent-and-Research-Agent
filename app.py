@@ -3,8 +3,16 @@ import os
 import sys
 import time
 from typing import Dict, List
+<<<<<<< HEAD
 
 import streamlit as st
+=======
+import streamlit as st
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+>>>>>>> ec1bd1a (Upload full local project)
 
 # ensure repo import works (src/ must be in repo root)
 sys.path.append(os.path.join(os.path.dirname(__file__), ""))

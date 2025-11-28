@@ -2,7 +2,11 @@
 research_live.py
 
 This agent performs:
+<<<<<<< HEAD
 1. Live web search (via SerpAPI)
+=======
+1. Live web search (via Google Custom Search API)
+>>>>>>> ec1bd1a (Upload full local project)
 2. Fetching webpage content
 3. Extracting readable text
 4. Chunking the text for embeddings
@@ -11,16 +15,28 @@ This agent performs:
 import os
 import requests
 from bs4 import BeautifulSoup
+<<<<<<< HEAD
 from serpapi import GoogleSearch
+=======
+from googleapiclient.discovery import build
+>>>>>>> ec1bd1a (Upload full local project)
 from typing import List, Dict
 
 
 # -----------------------------------------------------------
+<<<<<<< HEAD
 # 1. LIVE SEARCH USING SERPAPI
 # -----------------------------------------------------------
 def search_web(query: str, num_results: int = 5) -> List[str]:
     """
     Performs a live Google search using SerpAPI and returns a list of URLs.
+=======
+# 1. LIVE SEARCH USING GOOGLE CUSTOM SEARCH API
+# -----------------------------------------------------------
+def search_web(query: str, num_results: int = 5) -> List[str]:
+    """
+    Performs a live Google search using the Google Custom Search API and returns a list of URLs.
+>>>>>>> ec1bd1a (Upload full local project)
 
     Args:
         query (str): search query
@@ -30,6 +46,7 @@ def search_web(query: str, num_results: int = 5) -> List[str]:
         List[str]: list of URLs
     """
 
+<<<<<<< HEAD
     api_key = os.environ.get("SERPAPI_KEY")
 
     if not api_key:
@@ -51,6 +68,26 @@ def search_web(query: str, num_results: int = 5) -> List[str]:
             urls.append(link)
 
     return urls
+=======
+    api_key = os.environ.get("GOOGLE_API_KEY")
+    cse_id = os.environ.get("CUSTOM_SEARCH_ENGINE_ID")
+
+    if not api_key:
+        raise Exception("Missing GOOGLE_API_KEY in environment variables.")
+    if not cse_id:
+        raise Exception("Missing CUSTOM_SEARCH_ENGINE_ID in environment variables.")
+
+    try:
+        service = build("customsearch", "v1", developerKey=api_key)
+        res = service.cse().list(q=query, cx=cse_id, num=num_results).execute()
+        
+        urls = [item['link'] for item in res.get('items', [])]
+        return urls
+
+    except Exception as e:
+        print(f"Error during Google search: {e}")
+        return []
+>>>>>>> ec1bd1a (Upload full local project)
 
 
 # -----------------------------------------------------------

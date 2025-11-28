@@ -2,7 +2,15 @@ chromadb
 sentence-transformers
 requests
 beautifulsoup4
+<<<<<<< HEAD
 serpapi
 openai
 faiss-cpu
 python-dotenv
+=======
+faiss-cpu
+python-dotenv
+streamlit
+google-api-python-client
+google-generativeai
+>>>>>>> ec1bd1a (Upload full local project)
