@@ -1,0 +1,30 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+.env
+
+# Jupyter notebook
+.ipynb_checkpoints/
+
+# VSCode
+.vscode/
+
+# Chroma / Vector DB
+chroma_db/
+*.duckdb
+*.sqlite
+*.db
+
+# Logs
+*.log
+
+# OS junk files
+.DS_Store
+Thumbs.db
